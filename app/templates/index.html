@@ -1,6 +1,24 @@
-<form action="{{url_for('main.add_movie')}}" method="POST" role="form">
-    <input name="add-movie" type="text">
-    <span>
-        <button type="submit">add</button>
-    </span>
-</form>
+{% extends "base.html" %}
+
+{% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Icon</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for movie in movies %}
+        <tr>
+          <td><img src={{ movie.iconUri }}></td>
+          <td>{{ movie.name }}</td>
+          <td>{{ movie.description }}</td>
+          <td>{{ movie.source }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

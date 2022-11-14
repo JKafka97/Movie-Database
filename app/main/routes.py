@@ -23,12 +23,6 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def index():
     find_and_update_data()
-    return render_template('index.html')
-
-@main.route('/add_movie', methods=['POST'])
-def add_movie():
-    movie_item = request.form.get('add-movie')
     movies_connection = mongo.db.movies
-    movies_connection.insert_one({"text" : movie_item})
-    return redirect(url_for('main.index'))
-
+    movies = movies_connection.find()
+    return render_template('index.html', title='Movies', movies=movies)
